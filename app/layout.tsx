@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Inter, Outfit, JetBrains_Mono } from 'next/font/google'
+import { Toaster } from 'sonner'
+import SessionProvider from '@frontend/components/providers/SessionProvider'
 import './globals.css'
 
 const inter = Inter({
@@ -8,9 +10,9 @@ const inter = Inter({
   display: 'swap',
 })
 
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-outfit',
   display: 'swap',
 })
 
@@ -21,34 +23,34 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nardiha-portfolio.com'),
-  title: 'NARDIHA PORTFOLIO | $375M Enterprise SaaS Acquisition',
+  metadataBase: new URL('https://narhub.com'),
+  title: 'Narhub | Enterprise Software That Prints Money',
   description:
-    '19 production-ready SaaS platforms. 400K+ LOC. 90% complete. DeFi, Gaming, Infrastructure, Enterprise. $375M-$425M valuation. Serious buyers only.',
+    '19 production-ready SaaS platforms. 400K+ lines of audited code. Zero technical debt. Deploy today, profit tomorrow. $40M ARR Year 1.',
   keywords: [
     'SaaS acquisition',
     'enterprise software for sale',
-    'NARDIHA portfolio',
-    'DeFi platform acquisition',
-    'crypto software portfolio',
-    '$375M software acquisition',
-    'institutional crypto custody',
-    'Web3 platform sale',
+    'buy software company',
+    'DeFi platform',
+    'crypto software',
+    'Web3 platform',
+    'software marketplace',
+    'ffollowme',
   ],
-  authors: [{ name: 'NARDIHA Holdings OÜ' }],
-  creator: 'NARDIHA Holdings OÜ',
-  publisher: 'NARDIHA Holdings OÜ',
+  authors: [{ name: 'ffollowme oü' }],
+  creator: 'ffollowme oü',
+  publisher: 'ffollowme oü',
   openGraph: {
-    title: 'NARDIHA PORTFOLIO | 19 Enterprise SaaS Platforms',
-    description: '$375M-$425M portfolio. Ready for strategic acquisition.',
-    url: 'https://nardiha-portfolio.com',
-    siteName: 'NARDIHA PORTFOLIO',
+    title: 'Narhub | 19 Enterprise SaaS Platforms',
+    description: 'Production-ready platforms generating $40M ARR Year 1. Deploy in 7 weeks.',
+    url: 'https://narhub.com',
+    siteName: 'Narhub',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'NARDIHA Portfolio Overview',
+        alt: 'Narhub - Enterprise Software Marketplace',
       },
     ],
     type: 'website',
@@ -56,8 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NARDIHA PORTFOLIO | $375M SaaS Acquisition',
-    description: '19 platforms. 400K+ LOC. 6 years Web3 development.',
+    title: 'Narhub | Enterprise Software That Prints Money',
+    description: '19 platforms. 400K+ LOC. Deploy in 7 weeks.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -71,9 +73,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 }
 
 export default function RootLayout({
@@ -84,12 +83,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="font-body antialiased">
-        {/* Grain texture overlay */}
-        <div className="grain-overlay" aria-hidden="true" />
-        {children}
+      <body className="font-body antialiased bg-white text-gray-900">
+        <SessionProvider>
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: 'white',
+                border: '1px solid #e2e8f0',
+                color: '#0f172a',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+              },
+            }}
+          />
+        </SessionProvider>
       </body>
     </html>
   )
